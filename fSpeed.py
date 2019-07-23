@@ -1,14 +1,17 @@
 import scipy.io.wavfile
 
 rate, data = scipy.io.wavfile.read('music.wav')
-
+non_zero_counter = 0
 file = open('musictest.fss', 'w')
 file.write("0\n")
 for i in range(len(data)):
+    #print(data[i])
     data_new = abs(data[i])
-    if data_new <= 258:
-        file.write("c4f0\n")
-    elif 258 < data_new <= 1027:
+    if data_new > 258:
+        non_zero_counter = 1
+    if data_new <= 258 and non_zero_counter > 0:
+        file.write("r-f\n")
+    if 258 < data_new <= 1027:
         file.write("c4f1\n")
     elif 1027 < data_new <= 1538:
         file.write("c4f2\n")
@@ -32,9 +35,7 @@ for i in range(len(data)):
         file.write("c4fb\n")
     elif 10240 < data_new <= 11776:
         file.write("c4fc\n")
-    elif 11776 < data_new <= 12544:
-        file.write("K-f\n")
-    elif 12544 < data_new <= 16640:
+    elif 11776 < data_new <= 16640:
         file.write("c4fd\n")
     elif 16640 < data_new <= 20736:
         file.write("c4fe\n")
