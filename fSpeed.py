@@ -1,12 +1,14 @@
-import scipy.io.wavfile
+import struct
+import wave
 
-rate, data = scipy.io.wavfile.read('music.wav')
+with wave.open('music.wav', 'rb') as wr:
+    frames = wr.readframes(wr.getnframes())
+
 non_zero_counter = 0
 file = open('musictest.fss', 'w')
 file.write("0\n")
-for i in range(len(data)):
-    #print(data[i])
-    data_new = abs(data[i])
+for offset in range(0, len(frames), 2):
+    data_new = abs(struct.unpack_from('<h', frames, offset)[0])
     if data_new > 258:
         non_zero_counter = 1
     if data_new <= 258 and non_zero_counter > 0:
