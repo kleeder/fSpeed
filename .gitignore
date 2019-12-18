@@ -1,4 +1,4 @@
 compile.sh
 fsound/
-musictest.fss
-music.wav
+*.fss
+*.wav
