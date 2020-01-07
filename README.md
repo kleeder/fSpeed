@@ -1,7 +1,7 @@
 # fSpeed
 
 fSpeed is a tool to convert 44100Hz mono wave files into .fss files.
-Command line support was added in Version [x.x]. External library 'click' is needed.
+Command line support was added in Version 1.4. External library 'click' is needed.
 
 # Changelog
 All notable changes to this project will be documented in this file.
